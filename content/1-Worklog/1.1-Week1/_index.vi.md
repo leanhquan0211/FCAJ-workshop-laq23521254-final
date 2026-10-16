@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 1"
+title: "Tuần 1: Nghiên cứu đề tài và kiến trúc serverless"
 date: 2024-01-01
 weight: 1
 chapter: false

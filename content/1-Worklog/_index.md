@@ -6,19 +6,13 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+Weekly worklog for the serverless event registration website on AWS.
 
-**On this page**, you will need to introduce your worklog. **How** did you complete it? How many weeks did you take to complete the program? **What** did you do in those weeks?
+**Week 1:** [Project Research and Serverless Architecture](1.1-week1/)
 
-Typically, and as a standard, a worklog is carried out over about 3 months (throughout the internship period) with weekly contents as follows:
+**Week 2:** [Local Environment and Initial Application Setup](1.2-week2/)
 
-**Week 1:** [Getting familiar with AWS and basic AWS services](1.1-week1/)
-
-**Week 2:** [Doing task A...](1.2-week2/)
-
-**Week 3:** [Doing task B...](1.3-week3/)
+**Week 3:** [Registration Flow Integration and Event Administration](1.3-week3/)
 
 **Week 4:** [Doing task C...](1.4-week4/)
 

@@ -1,5 +1,5 @@
 ---
-title: "Week 1 Worklog"
+title: "Week 1: Project Research and Serverless Architecture"
 date: 2024-01-01
 weight: 1
 chapter: false
