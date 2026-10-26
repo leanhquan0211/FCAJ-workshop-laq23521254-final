@@ -14,7 +14,7 @@ Nhật ký công việc theo tuần của dự án website đăng ký sự kiệ
 
 **Tuần 3:** [Tích hợp luồng đăng ký và quản trị sự kiện](1.3-week3/)
 
-**Tuần 4:** [Làm công việc C...](1.4-week4/)
+**Tuần 4:** [Xây dựng bộ kiểm thử và tích hợp luồng người mua](1.4-week4/)
 
 **Tuần 5:** [Làm công việc D...](1.5-week5/)
 
