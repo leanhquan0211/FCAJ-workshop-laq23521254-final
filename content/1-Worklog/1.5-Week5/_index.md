@@ -1,57 +1,30 @@
 ---
-title: "Week 5 Worklog"
+title: "Week 5: Interface Redesign and Appearance Customization"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 5 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Redesign layouts and establish consistent presentation across Frontend screens.
+* Add appearance controls and preserve and restore user preferences.
+* Improve navigation, keyboard operation, and the experience on small screens.
+* Check the interface, update design documentation, and complete handover.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 4 | - Review the existing interface and update the design system using reference images.<br>&emsp; + Align colors, typography, glass surfaces, and shared appearance settings.<br>- Reorganize the event listing and navigation layout.<br>&emsp; + Introduce a horizontal header, retain role-based menus, and use card grids for administration lists and personal tickets.<br>- Redesign login and signup with separate introduction and form sections for desktop and mobile.<br>- Create layered SVG branding, icons, and artwork; add background petals, decorative motion, and Liquid Glass surfaces. | 28/10/2026 | 28/10/2026 | [MDN: SVG graphics](https://developer.mozilla.org/en-US/docs/Web/SVG); [MDN: glass effects](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/backdrop-filter) |
+| 6 | - Complete controls for light/dark mode, transparency, neon, elevation, hue, and roundness.<br>&emsp; + Add a compact mobile settings panel, defaults, preference storage, and color reset.<br>- Improve page transitions, scrolling to the event list, and category selection combined with filters.<br>- Adjust dark-mode dropdowns, text contrast, keyboard operation, focus, and reduced-motion behavior.<br>- Check layouts, controls, and preference persistence after reload in both themes.<br>&emsp; + Review build/lint and browser checks using response fixtures; update design and usage documentation and hand over the Frontend changes. | 30/10/2026 | 30/10/2026 | [MDN: browser preference storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage); [MDN: reduced motion](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion); [MDN: scrolling to content](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) |
 
 ### Week 5 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Layout and navigation:** The event page includes an introduction, categories, filters, and event cards; the application uses a horizontal header with role-based menus. Administration lists and personal tickets use card grids. Login and signup have separate introduction and glass form sections, arranged for desktop and mobile.
+* **Design system and artwork:** Liquid Glass surfaces, colors, and typography are applied consistently. Layered SVG elements give the flower logo, fan artwork, petals, and icons simulated depth; decoration stays behind content and does not block interaction.
+* **Appearance customization:** Light/dark mode and five appearance properties are adjustable, saved per browser, and restored before the page is displayed. The new defaults are light mode, 90% transparency, 45% neon, 35% elevation, 24° hue, and 0% roundness; saved preferences are preserved. Color reset changes only the hue.
+* **Interaction and accessibility:** Page transitions and scrolling to results are smoother, and category selection stays synchronized with filters. Dropdowns are readable in both themes; the mobile settings panel, menu, and controls support keyboard operation, Escape, and focus restoration. Reduced-motion mode disables decorative animation, page transitions, and smooth scrolling.
+* **Interface checks:** Existing reports record successful builds and lint with no errors and two pre-existing Fast Refresh warnings. Layout, customization, persistence, keyboard, and reduced-motion checks used response fixtures in a separate browser profile without database writes; they do not replace real Backend integration tests. Contrast checks cover only the tested color pairs and do not establish comprehensive conformance.
+* **Documentation and handover:** Design and configuration documentation and checking evidence were updated, and the Frontend changes were merged and pushed to the shared branch. Existing login, booking, and administration journeys were preserved; AWS deployment was not performed.

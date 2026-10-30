@@ -16,7 +16,7 @@ Weekly worklog for the serverless event registration website on AWS.
 
 **Week 4:** [Test Lab Development and Buyer Flow Integration](1.4-week4/)
 
-**Week 5:** [Doing task D...](1.5-week5/)
+**Week 5:** [Interface Redesign and Appearance Customization](1.5-week5/)
 
 **Week 6:** [Doing task E...](1.6-week6/)
 
