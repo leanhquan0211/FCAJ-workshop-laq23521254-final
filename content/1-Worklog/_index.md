@@ -18,7 +18,7 @@ Weekly worklog for the serverless event registration website on AWS.
 
 **Week 5:** [Interface Redesign and Appearance Customization](1.5-week5/)
 
-**Week 6:** [Doing task E...](1.6-week6/)
+**Week 6:** [AWS Infrastructure Deployment with Terraform and Resource Teardown](1.6-week6/)
 
 **Week 7:** [Doing task G...](1.7-week7/)
 

@@ -18,7 +18,7 @@ Nhật ký công việc theo tuần của dự án website đăng ký sự kiệ
 
 **Tuần 5:** [Thiết kế lại giao diện và tùy chỉnh hiển thị](1.5-week5/)
 
-**Tuần 6:** [Làm công việc E...](1.6-week6/)
+**Tuần 6:** [Triển khai hạ tầng AWS bằng Terraform và thu hồi tài nguyên](1.6-week6/)
 
 **Tuần 7:** [Làm công việc G...](1.7-week7/)
 

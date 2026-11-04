@@ -1,58 +1,31 @@
 ---
-title: "Worklog Tuần 6"
+title: "Tuần 6: Triển khai hạ tầng AWS bằng Terraform và thu hồi tài nguyên"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 6:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Chuẩn bị thông tin xác thực AWS, quy tắc bảo mật mã nguồn và cập nhật ứng dụng để hoạt động tương thích trên cả môi trường local lẫn đám mây.
+* Xây dựng cấu hình hạ tầng bằng Terraform cho toàn bộ các tầng dịch vụ gồm lưu trữ tĩnh, phân phối nội dung, cổng API, hàm xử lý và cơ sở dữ liệu.
+* Triển khai hệ thống lên AWS, xử lý các ràng buộc về quyền hạn và bộ nhớ đệm, đồng thời kiểm thử luồng người dùng thực tế qua HTTPS.
+* Thu hồi toàn bộ tài nguyên sau kiểm thử để tránh phát sinh chi phí duy trì, xác minh trạng thái dọn dẹp tự động và hoàn tất bàn giao mã nguồn.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Thiết lập danh tính triển khai trên AWS CLI theo thông tin tài khoản phòng lab.<br>- Chuẩn bị ghi chú bàn giao nội bộ và rà soát quy tắc loại trừ của Git.<br>&emsp; + Loại trừ các tài liệu nội bộ, thông tin xác thực, tệp trạng thái hạ tầng, biến môi trường và các gói biên dịch khỏi kho mã nguồn.<br>- Điều chỉnh cấu hình kết nối giữa Backend và Frontend để hỗ trợ môi trường đám mây.<br>&emsp; + Bổ sung cơ chế nhận diện môi trường chạy tại Backend để tự động chuyển sang dùng quyền IAM và bảng DynamoDB trên AWS, đồng thời giữ nguyên kết nối cơ sở dữ liệu local khi kiểm thử trên máy.<br>&emsp; + Mở rộng cấu hình nguồn gốc được phép truy cập ở Backend; cập nhật cấu hình gọi API của Frontend sang đường dẫn tương đối qua CDN và biên dịch lại gói giao diện. | 02/11/2026 | 02/11/2026 | [AWS CLI: cấu hình xác thực](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html); [AWS Lambda: biến môi trường](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html); [Vite: biến môi trường và chế độ chạy](https://vite.dev/guide/env-and-mode.html) |
+| 3 | - Xây dựng bộ cấu hình hạ tầng theo hướng khai báo bằng Terraform cho toàn bộ hệ thống serverless.<br>&emsp; + Thiết lập nhà cung cấp AWS kèm thẻ quản lý tự động và khai báo các tham số dùng chung của dự án.<br>&emsp; + Định nghĩa bảng DynamoDB chế độ theo yêu cầu với khóa chính, khóa sắp xếp và cơ chế tự động hết hạn bản ghi.<br>- Cấu hình tầng xử lý, cổng API và phân phối giao diện người dùng.<br>&emsp; + Thiết lập quy trình đóng gói mã nguồn hàm Lambda Python, vai trò thực thi IAM, nhóm nhật ký CloudWatch và cổng HTTP API v2 với đầy đủ các tuyến theo đặc tả hiện hành.<br>&emsp; + Cấu hình S3 riêng tư chặn truy cập công khai để lưu trữ gói giao diện; thiết lập CloudFront kết hợp kiểm soát truy cập gốc OAC, định tuyến về S3 và API Gateway cùng các hàm xử lý đường dẫn tại biên và xuất các thông tin truy cập sau triển khai. | 03/11/2026 | 03/11/2026 | [Terraform: tài liệu AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs); [AWS CloudFront: kiểm soát truy cập gốc OAC](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html); [AWS API Gateway: HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) |
+| 4 | - Triển khai hạ tầng lên AWS và xử lý các vướng mắc phát sinh trong môi trường tài khoản phòng lab.<br>&emsp; + Điều chỉnh cách tra cứu chính sách bộ nhớ đệm quản lý sẵn của CloudFront và gắn giới hạn quyền bắt buộc cho vai trò IAM của hàm Lambda.<br>&emsp; + Đồng bộ quy tắc đặt tên bảng dữ liệu, hàm xử lý theo chuẩn của tài khoản lab và bổ sung các quyền kiểm tra bảng, kiểm tra điều kiện cần thiết.<br>&emsp; + Xóa bộ nhớ đệm trên CloudFront, làm mới trình duyệt để nhận bản giao diện mới và kiểm tra tuyến kiểm tra sức khỏe của API.<br>- Kiểm thử nghiệm thu luồng truy cập trang web qua HTTPS, đăng ký tài khoản, đăng nhập quản lý phiên và ghi đọc dữ liệu trên đám mây.<br>- Thu hồi tài nguyên, kiểm tra trạng thái dọn dẹp và bàn giao mã nguồn.<br>&emsp; + Thực hiện hủy toàn bộ hạ tầng qua Terraform, xử lý vai trò IAM còn vướng giới hạn quyền bằng AWS CLI và đồng bộ lại trạng thái hạ tầng.<br>&emsp; + Xây dựng kịch bản tự động rà soát các nhóm tài nguyên trên tài khoản AWS; dọn các thư mục biên dịch tạm và hợp nhất thay đổi vào nhánh dùng chung. | 04/11/2026 | 04/11/2026 | [AWS IAM: giới hạn quyền Permissions Boundary](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html); [AWS CloudFront: xóa bộ nhớ đệm file](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html); [Terraform: lệnh thu hồi tài nguyên destroy](https://developer.hashicorp.com/terraform/cli/commands/destroy) |
 
 ### Kết quả đạt được tuần 6:
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* **Bảo mật và khả năng tương thích môi trường:** Phiên làm việc AWS CLI và quy tắc loại trừ Git đã được thiết lập để ngăn đưa thông tin xác thực, trạng thái hạ tầng hoặc tệp biên dịch lên kho mã nguồn. Backend tự động chuyển đổi giữa cơ sở dữ liệu local và cơ sở dữ liệu trên AWS theo môi trường chạy mà không ảnh hưởng đến kiểm thử trên máy; Frontend gửi yêu cầu qua cùng tên miền phân phối nội dung nên tránh được lỗi xung đột giao thức và CORS.
+* **Cấu hình hạ tầng đám mây:** Bộ cấu hình Terraform đã mô tả đầy đủ kiến trúc gồm CloudFront hỗ trợ HTTPS và các hàm biên điều hướng yêu cầu, S3 riêng tư kết hợp kiểm soát truy cập gốc OAC, cổng HTTP API v2 với 20 tuyến, hàm Lambda Python và bảng DynamoDB chế độ theo yêu cầu có cấu hình thời gian sống cho bản ghi.
+* **Xử lý ràng buộc triển khai:** Các vấn đề phát sinh trong quá trình đưa hệ thống lên tài khoản phòng lab đã được giải quyết, gồm tra cứu chính sách bộ nhớ đệm theo tên chuẩn của AWS, gắn giới hạn quyền IAM bắt buộc, chuẩn hóa tiền tố tên tài nguyên kèm quyền truy cập bảng để khắc phục lỗi 503 khi đăng nhập, xóa bộ nhớ đệm CDN để cập nhật gói giao diện mới, xác nhận phản hồi tại đường dẫn gốc của cổng API và bổ sung thư viện SDK cho môi trường chạy kịch bản trên máy.
+* **Nghiệm thu hoạt động thực tế:** Giao diện ứng dụng hoạt động ổn định qua kết nối HTTPS trên CloudFront. Người dùng có thể đăng ký tài khoản mới, đăng nhập nhận cookie phiên trên trình duyệt và thực hiện các thao tác đọc ghi dữ liệu trực tiếp với bảng DynamoDB trên đám mây mà không phát sinh lỗi kết nối.
+* **Thu hồi tài nguyên và kiểm tra chi phí:** Toàn bộ tài nguyên đã được gỡ bỏ sau phiên nghiệm thu bằng Terraform kết hợp AWS CLI cho phần vai trò IAM. Kịch bản kiểm tra tự động xác nhận cả 7 nhóm dịch vụ gồm DynamoDB, Lambda, API Gateway, S3, CloudFront, CloudWatch Log Groups và IAM Roles đều không còn tài nguyên tồn đọng, bảo đảm không phát sinh chi phí duy trì ngầm.
+* **Quản lý mã nguồn và bàn giao:** Các tệp sinh tạm trong quá trình đóng gói và biên dịch đã được dọn sạch; cấu hình hạ tầng, điều chỉnh tương thích đám mây và công cụ kiểm tra dọn dẹp đã được ghi nhận và hợp nhất vào nhánh chính không xảy ra xung đột.

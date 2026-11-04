@@ -1,57 +1,31 @@
 ---
-title: "Week 6 Worklog"
+title: "Week 6: AWS Infrastructure Deployment with Terraform and Resource Teardown"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 6 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Prepare AWS credentials, repository ignore rules, and application configuration updates to support both local testing and cloud execution.
+* Build declarative Terraform infrastructure configurations covering static storage, content delivery, API routing, serverless compute, and database layers.
+* Deploy the application to AWS, resolve lab account permission and caching constraints, and verify live user flows over HTTPS.
+* Tear down all cloud resources after verification to prevent ongoing costs, automate cleanup checks, and complete source code handover.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 2 | - Configure the AWS CLI deployment identity using the lab account credentials.<br>- Prepare internal handover documentation and review Git ignore rules.<br>&emsp; + Exclude internal notes, credential files, infrastructure state files, environment variables, and build outputs from version control.<br>- Update Backend and Frontend configuration layers for cloud compatibility.<br>&emsp; + Add runtime environment detection in the Backend to switch automatically to the Lambda IAM role and cloud DynamoDB table on AWS while preserving local database connections for local testing.<br>&emsp; + Expand allowed origin settings in the Backend; update the Frontend API configuration to use relative paths through the CDN and rebuild the interface bundle. | 02/11/2026 | 02/11/2026 | [AWS CLI: configuration and credential files](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html); [AWS Lambda: environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html); [Vite: env variables and modes](https://vite.dev/guide/env-and-mode.html) |
+| 3 | - Build declarative Terraform infrastructure configurations for the full serverless stack.<br>&emsp; + Configure the AWS provider with automated resource tagging and declare shared project parameters.<br>&emsp; + Define the on-demand DynamoDB table with partition and sort keys and time-to-live expiration.<br>- Configure the compute, API routing, and static content delivery layers.<br>&emsp; + Set up automated Python Lambda packaging, the IAM execution role, CloudWatch logging, and HTTP API v2 with all routes defined by the current API contract.<br>&emsp; + Configure a private S3 bucket blocking public access for frontend assets; set up CloudFront with Origin Access Control, origins for S3 and API Gateway, edge functions for API prefix handling and single-page routing, and deployment outputs. | 03/11/2026 | 03/11/2026 | [Terraform: AWS Provider documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs); [AWS CloudFront: Origin Access Control](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html); [AWS API Gateway: HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) |
+| 4 | - Deploy the infrastructure to AWS and resolve technical constraints in the lab account environment.<br>&emsp; + Update CloudFront cache policy lookups to use AWS-managed policy names and attach the mandatory permissions boundary to the Lambda IAM role.<br>&emsp; + Align the DynamoDB table and Lambda function naming prefixes with lab policy requirements and grant the required table inspection and condition check permissions.<br>&emsp; + Invalidate the CloudFront cache, refresh the browser to load the updated frontend bundle, and verify the API health check route.<br>- Verify end-to-end HTTPS access, user registration, login session management, and cloud database reads and writes.<br>- Tear down cloud resources, verify cleanup status, and hand over the source code.<br>&emsp; + Destroy the provisioned infrastructure with Terraform, remove the remaining IAM role via AWS CLI due to EC2 instance profile listing restrictions, and synchronize the infrastructure state.<br>&emsp; + Build and run an automated verification script to scan all target AWS resource groups; clean temporary build artifacts and merge the changes into the shared branch. | 04/11/2026 | 04/11/2026 | [AWS IAM: permissions boundaries](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html); [AWS CloudFront: invalidating files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html); [Terraform: destroy command](https://developer.hashicorp.com/terraform/cli/commands/destroy) |
 
 ### Week 6 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* **Security and environment compatibility:** Configured the AWS CLI session and repository ignore rules to prevent credentials, infrastructure state files, or build artifacts from being committed. The Backend switches between local and cloud DynamoDB automatically based on the runtime environment without disrupting local testing, and the Frontend routes API calls through the same CDN domain to avoid mixed-content and CORS issues.
+* **Cloud infrastructure configuration:** Completed the declarative Terraform setup covering an HTTPS CloudFront distribution with edge routing functions, a private S3 bucket protected by Origin Access Control, an HTTP API v2 gateway with 20 routes, a Python Lambda function, and an on-demand DynamoDB table with record expiration enabled.
+* **Deployment constraint resolution:** Resolved the issues encountered during lab deployment, including looking up managed CloudFront cache policies by name, attaching the required IAM permissions boundary, aligning resource naming prefixes and table permissions to eliminate 503 login errors, invalidating cached frontend scripts on the CDN, confirming expected responses on the unmapped API root path, and installing the AWS SDK in the local scripting environment.
+* **Live cloud verification:** The web application loaded over HTTPS through CloudFront, allowing users to register accounts, sign in with browser session cookies, and read and write data directly against the cloud DynamoDB table without connection or service errors.
+* **Resource teardown and cost control:** Removed all provisioned cloud resources after verification using Terraform alongside AWS CLI cleanup for the IAM role. The automated inspection script confirmed that all 7 service categories—DynamoDB, Lambda, API Gateway, S3, CloudFront, CloudWatch Log Groups, and IAM Roles—had no remaining resources, ensuring zero ongoing maintenance cost.
+* **Source control and handover:** Removed temporary packaging and build directories, recorded the infrastructure definitions, cloud compatibility adjustments, and cleanup verification tool in version control, and merged the work cleanly into the main branch without conflicts.
